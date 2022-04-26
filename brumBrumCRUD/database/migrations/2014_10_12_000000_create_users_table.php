@@ -26,7 +26,6 @@ return new class extends Migration
             $table->string('otherInformation')->nullable();
             $table->string('photo')->nullable();
             $table->string('googleID')->nullable();
-            $table->rememberToken();
 
             $table->timestamps();
         });

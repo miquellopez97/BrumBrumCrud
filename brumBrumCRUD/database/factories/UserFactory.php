@@ -17,12 +17,20 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $name = $this->faker->userName();
+        $surname = $this->faker->lastName();
+
         return [
-            'name' => $this->faker->name(),
+            'username' => ( $name . $surname),
             'email' => $this->faker->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'remember_token' => Str::random(10),
+            'name' => $name,
+            'surname' => $surname,
+            'password' => bcrypt('12345'),
+            'rol' => "user",
+            'detail' => "test",
+            'otherInformation' => "test",
+            'photo' => Str::random(10),
+            'googleID' => Str::random(10)
         ];
     }
 
