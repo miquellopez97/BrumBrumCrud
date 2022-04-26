@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -37,7 +38,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $request['password'] = bcrypt('password');
+        $request['password'] = Hash::make($request['password']);
         $user = User::create($request->all());
 
         return response()->json([
@@ -91,17 +92,20 @@ class UserController extends Controller
         //
     }
 
-    public function login()
+    public function login(Request $request)
     {
-        $credentials = request(['email', 'password']);
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
 
         if (!Auth::attempt($credentials)) {
-            return $this->error('Credentials not match', 401);
+            return response()->json(['error' => 'Credentials not match'], 401);
         }
 
         return response()->json([
             'User' => $credentials['email'],
-            //'token' => auth()->user()->createToken('brumbrumToken')->plainTextToken
+            'token' => auth()->user()->createToken('brumbrumToken')->plainTextToken
         ]);
     }
 }

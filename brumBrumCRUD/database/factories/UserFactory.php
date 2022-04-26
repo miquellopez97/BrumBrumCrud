@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -22,10 +23,10 @@ class UserFactory extends Factory
 
         return [
             'username' => ( $name . $surname),
-            'email' => $this->faker->unique()->safeEmail(),
+            'email' => ( $name . $surname . "@gmail.com"),
             'name' => $name,
             'surname' => $surname,
-            'password' => bcrypt('12345'),
+            'password' => Hash::make('12345'),
             'rol' => "user",
             'detail' => "test",
             'otherInformation' => "test",
