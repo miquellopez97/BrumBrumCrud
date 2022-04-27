@@ -77,7 +77,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function logout($id, $tokenId) 
+    public function logout($id, $tokenId)
     {
         $user = User::where('id', $id)->first();
 
