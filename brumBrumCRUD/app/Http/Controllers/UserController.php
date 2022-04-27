@@ -10,32 +10,18 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum', ['only' => ['update', 'destroy']]);
+    }
+
     public function index()
     {
-        //
+        $users = User::all();
+        return response()->json($users, 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request['password'] = Hash::make($request['password']);
@@ -47,49 +33,29 @@ class UserController extends Controller
             201]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        if (is_numeric($id)) {
+            $user = User::where('id', $id)->first();
+            return response()->json($user, 200);
+        } else {
+            $user = User::where('email', $id)->first();
+            return response()->json($user, 200);
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        $user->fill($request->all())->save();
+        return response()->json($user, 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->forceDelete();
+        return response()->noContent();
     }
 
     public function login(Request $request)
@@ -103,9 +69,18 @@ class UserController extends Controller
             return response()->json(['error' => 'Credentials not match'], 401);
         }
 
+        $user = User::where('email', $request['email'])->first();
+
         return response()->json([
             'User' => $credentials['email'],
-            'token' => auth()->user()->createToken('brumbrumToken')->plainTextToken
+            "token" => $user->createToken('brumbrumToken')->plainTextToken,
         ]);
+    }
+
+    public function logout($id, $tokenId) 
+    {
+        $user = User::where('id', $id)->first();
+
+        $user->tokens()->where('id', $tokenId)->delete();
     }
 }
