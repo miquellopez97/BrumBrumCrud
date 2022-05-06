@@ -72,7 +72,7 @@ class UserController extends Controller
         $user = User::where('email', $request['email'])->first();
 
         return response()->json([
-            'User' => $user->username,
+            'User' => $user->id,
             "token" => $user->createToken('brumbrumToken')->plainTextToken,
         ]);
     }
