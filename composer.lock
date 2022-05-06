@@ -2434,18 +2434,6 @@
         },
         {
             "name": "psy/psysh",
-<<<<<<< HEAD
-            "version": "v0.11.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "6833626ee48ef9bcc8aca8f9f166760441c12573"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/6833626ee48ef9bcc8aca8f9f166760441c12573",
-                "reference": "6833626ee48ef9bcc8aca8f9f166760441c12573",
-=======
             "version": "v0.11.4",
             "source": {
                 "type": "git",
@@ -2456,7 +2444,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/bobthecow/psysh/zipball/05c544b339b112226ad14803e1e5b09a61957454",
                 "reference": "05c544b339b112226ad14803e1e5b09a61957454",
->>>>>>> 21e5e0e6b10bbf2608d7e92fff4f7ad5bb456015
                 "shasum": ""
             },
             "require": {
@@ -2517,15 +2504,9 @@
             ],
             "support": {
                 "issues": "https://github.com/bobthecow/psysh/issues",
-<<<<<<< HEAD
-                "source": "https://github.com/bobthecow/psysh/tree/v0.11.3"
-            },
-            "time": "2022-05-05T02:19:43+00:00"
-=======
                 "source": "https://github.com/bobthecow/psysh/tree/v0.11.4"
             },
             "time": "2022-05-06T12:49:14+00:00"
->>>>>>> 21e5e0e6b10bbf2608d7e92fff4f7ad5bb456015
         },
         {
             "name": "ralouphie/getallheaders",
