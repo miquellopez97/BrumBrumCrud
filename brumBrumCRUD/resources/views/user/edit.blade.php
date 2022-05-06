@@ -46,27 +46,6 @@
                     <input type="text" name="password" class="form-control" placeholder="Password" value={{$user->password}}>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Rol:</strong>
-                    <input type="text" name="rol" class="form-control" placeholder="Rol" value={{$user->rol}}>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Detail:</strong>
-                    <textarea type="text" name="detail" class="form-control" placeholder="Detail" value={{$user->detail}}></textarea>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Other Information:</strong>
-                    <textarea type="text" name="otherInfo" class="form-control" placeholder="Other Information" value={{$user->otherInformation}}></textarea>
-                </div>
-                <div class="form-group">
-                    <strong>Photo:</strong>
-                    <textarea type="text" name="photo" class="form-control" placeholder="Photo" value={{$user->photo}}></textarea>
-                </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Submit</button>
