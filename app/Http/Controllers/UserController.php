@@ -73,6 +73,7 @@ class UserController extends Controller
 
         return response()->json([
             'User' => $user->id,
+            'body' => $user,
             "token" => $user->createToken('brumbrumToken')->plainTextToken,
         ]);
     }
