@@ -78,10 +78,13 @@ class UserController extends Controller
         ]);
     }
 
-    public function logout($id, $tokenId)
+    public function logout()
     {
-        $user = User::where('id', $id)->first();
+        $user->tokens()->delete();
 
-        $user->tokens()->where('id', $tokenId)->delete();
+        return response()->json([
+            "status" => 1,
+            "msg" => "Logout okeey",
+        ]);
     }
 }
