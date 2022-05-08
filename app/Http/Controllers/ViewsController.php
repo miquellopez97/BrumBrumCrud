@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class ViewsController extends Controller
 {
@@ -15,32 +16,6 @@ class ViewsController extends Controller
         return view('user.index', compact('users'));
     }
 
-    public function create()
-    {
-        return view('posts.create');
-    }
-
-    public function store(Request $request)
-    {
-        $request->validate([
-            'username' => 'required',
-            'email' => 'required',
-            'name' => 'required',
-            'surname' => 'required',
-            'password' => 'required',
-            'rol',
-            'detail',
-            'otherInformation',
-            'photo',
-            'googleID'
-        ]);
-
-        $request['password'] = Hash::make($request['password']);
-        BbUsers::create($request->all());
-
-        return redirect()->route('user.index')
-            ->with('success', 'User created successfully.');
-    }
 
     public function show(User $user)
     {
@@ -52,7 +27,7 @@ class ViewsController extends Controller
         return view('user.edit', compact('user'));
     }
 
-    public function update(Request $request, BbUsers $user)
+    public function update(Request $request, User $user)
     {
         $request->validate([
             'name',
@@ -76,5 +51,18 @@ class ViewsController extends Controller
 
         return redirect()->route('user.index')
             ->with('success', 'User deleted successfully');
+    }
+
+    public function login(Request $request)
+    {
+        $request->validate([
+            'email',
+            'password'
+        ]);
+
+        if (Auth::attempt($request->all())) {
+            return redirect()->route('user.index')
+            ->with('success', 'User updated successfully');
+        }
     }
 }

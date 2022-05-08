@@ -6,9 +6,6 @@
             <div class="pull-left">
                 <h2>BRUM BRUM CRUD</h2>
             </div>
-            <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('user.create') }}"> Create New User</a>
-            </div>
         </div>
     </div>
 
