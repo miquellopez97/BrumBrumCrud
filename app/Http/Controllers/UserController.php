@@ -78,8 +78,10 @@ class UserController extends Controller
         ]);
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
+        $user = User::where('email', $request['email'])->first();
+
         $user->tokens()->delete();
 
         return response()->json([
