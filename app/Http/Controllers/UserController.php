@@ -7,13 +7,14 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
 
     public function __construct()
     {
-        $this->middleware('auth:sanctum', ['only' => ['update', 'destroy']]);
+        $this->middleware('auth:sanctum', ['only' => ['index','show','update', 'destroy']]);
     }
 
     public function index()
@@ -24,7 +25,10 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        $request['password'] = Hash::make($request['password']);
+        $request->merge([
+            'password' => Hash::make($request['password']),
+            'rol' => "user"
+        ]);
         $user = User::create($request->all());
 
         return response()->json([
@@ -60,10 +64,16 @@ class UserController extends Controller
 
     public function login(Request $request)
     {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required|min:5|max:16',
         ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => 'Bad email / password form'], 401);
+        }
+
+        $credentials = $validator->validated();
 
         if (!Auth::attempt($credentials)) {
             return response()->json(['error' => 'Credentials not match'], 401);
