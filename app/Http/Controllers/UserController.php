@@ -48,6 +48,17 @@ class UserController extends Controller
         }
     }
 
+    public function userLab($id)
+    {
+        $user = User::where('id', $id)->first();
+        $value = [
+            "username" => $user -> username,
+            "name" => $user -> name,
+            "surname" => $user -> surname,
+        ];
+        return response()->json($value, 200);
+    }
+
     public function update(Request $request, $id)
     {
         $user = User::find($id);

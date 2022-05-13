@@ -19,3 +19,4 @@ Route::resource('/user', UserController::class);
 
 Route::post('/login', [UserController::class, 'login']);
 Route::post('/logout', [UserController::class, 'logout']);
+Route::get('/userSimple/{params?}', [UserController::class, 'userLab']);
