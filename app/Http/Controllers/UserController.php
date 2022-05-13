@@ -64,6 +64,8 @@ class UserController extends Controller
 
     public function login(Request $request)
     {
+        $request->headers->set('Accept', 'application/json');
+
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required|min:5|max:16',

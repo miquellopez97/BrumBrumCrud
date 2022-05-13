@@ -62,17 +62,5 @@ class ViewsController extends Controller
     public function check(Request $request)
     {
         return $request->input();
-        // $request->validate([
-        //     'email',
-        //     'password'
-        // ]);
-
-        // $user = User::where('email','=',$request->email)->firts();
-        // if($user){
-        //     if(Hash::check($request->password, $user->password)){
-        //         $request->session()->put('LoggedUser', $user->$id);
-        //         return redirect('index');
-        //     }
-        // }
     }
 }
