@@ -53,16 +53,26 @@ class ViewsController extends Controller
             ->with('success', 'User deleted successfully');
     }
 
-    public function login(Request $request)
-    {
-        $request->validate([
-            'email',
-            'password'
-        ]);
 
-        if (Auth::attempt($request->all())) {
-            return redirect()->route('user.index')
-            ->with('success', 'User updated successfully');
-        }
+    public function loginView(Request $request)
+    {
+        return view('user.login');
+    }
+
+    public function check(Request $request)
+    {
+        return $request->input();
+        // $request->validate([
+        //     'email',
+        //     'password'
+        // ]);
+
+        // $user = User::where('email','=',$request->email)->firts();
+        // if($user){
+        //     if(Hash::check($request->password, $user->password)){
+        //         $request->session()->put('LoggedUser', $user->$id);
+        //         return redirect('index');
+        //     }
+        // }
     }
 }

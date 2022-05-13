@@ -15,6 +15,8 @@
         </div>
     @endif
 
+    <a href="logout">Logout</a>
+
     <table class="table table-bordered">
         <tr>
             <th>ID</th>
