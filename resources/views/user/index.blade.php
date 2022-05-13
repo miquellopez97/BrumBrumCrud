@@ -15,7 +15,8 @@
         </div>
     @endif
 
-    <a href="logout">Logout</a>
+    <a class="btn btn-primary" href="logout">Logout</a>
+    <a class="btn btn-primary" href="profile">Ver mi perfil</a>
 
     <table class="table table-bordered">
         <tr>
